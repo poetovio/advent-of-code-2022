@@ -46,7 +46,7 @@ int main() {
         }
     }
 
-    printf("Prvi del -> %d\n", stevec);
+    printf("Drugi del -> %d\n", stevec);
 
     fclose(file);
 
