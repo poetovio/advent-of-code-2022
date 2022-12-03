@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
 
 const int bufferLength = 255;
 
@@ -7,50 +9,48 @@ int main() {
 
     FILE *file;
 
-    file = fopen("input3.txt", "r");
+    file = fopen("input.txt", "r");
     char buffer[255];
 
     int stevec = 0;
 
     while(fgets(buffer, bufferLength, file)) {
-        int i = 0;
-        char c = buffer[i];
 
-        while(c != '\n') {
-            int steviloPojavitev = 0;
-            int mesto = 0;
+        int vmesniStevec = 0;
+        char* prviDel = (char*)malloc(strlen(buffer) * sizeof(char));
+        char* drugiDel = (char*)malloc(strlen(buffer) * sizeof(char));
 
-            int j = 0;
-            char k = buffer[j];
+        bool jeNasel = true;
 
-            while(k != '\n') {
-                if(c == k) {
-                    steviloPojavitev++;
-                    mesto = j;
-                }
-
-                j++;
-                k = buffer[j];
-            }
-
-            int vrednost = buffer[mesto];
-
-            printf("%d %d\n", vrednost, steviloPojavitev);
-
-            if (steviloPojavitev > 1) {
-                if('A' >= buffer[mesto] || buffer[mesto] <= 'Z') {
-                    stevec += (vrednost - 38);
-                } else {
-                    stevec += (vrednost - 96);
-                }
-            }
-
-            i++;
-            c = buffer[i];
+        for(int i = 0; i < strlen(buffer) / 2; i++) {
+            prviDel[i] = buffer[i];
+            vmesniStevec++;
         }
-    }
+        for(int j = 0; j < strlen(buffer); j++) {
+            drugiDel[j] = buffer[vmesniStevec];
+            vmesniStevec++;
+        }
 
-    printf("%s\n", "Zakaj mi ne pribntaš????");
+        for(int i = 0; i < strlen(prviDel) && jeNasel; i++) {
+            for(int j = 0; j < strlen(drugiDel) && jeNasel; j++) {
+                if(prviDel[i] == drugiDel[j]) {
+
+                    int vrednost = drugiDel[j];
+                    
+                    if(isupper(drugiDel[j])) {
+                        stevec += (vrednost - 38);
+                    } else {
+                        stevec += (vrednost - 96);
+                    }
+
+                    jeNasel = false;
+                }
+            }
+        }
+
+        free(prviDel);
+        free(drugiDel);
+    }
 
     printf("Prvi del -> %d\n", stevec);
 
