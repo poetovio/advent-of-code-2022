@@ -6,7 +6,6 @@ stevec = 0
 stevec2 = 0
 
 for vrstica in vrstice:
-    print(vrstica)
     del1, del2 = vrstica.split(",")
 
     stevilo1, stevilo2 = del1.split("-")
@@ -16,7 +15,6 @@ for vrstica in vrstice:
 
     if((int(stevilo2) >= int(stevilo3) and int(stevilo1) <= int(stevilo4))):
         stevec2 += 1
-        print(" yes")
     
 
 print("Del 1 -> " + str(stevec))
