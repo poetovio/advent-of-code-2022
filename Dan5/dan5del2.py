@@ -56,21 +56,28 @@ sestaVrstica.reverse()
 sedmaVrstica.reverse()
 osmaVrstica.reverse()
 
-
 for i in range(10, len(vrstice)):
     deli = vrstice[i].split(' ')
+
     steviloPonovitev = 0
+
+    kos = []
 
     while (steviloPonovitev < int(deli[1])):
         premaknjeno = inputi[int(deli[3]) - 1][-1]
 
-        inputi[int(deli[5]) - 1].append(premaknjeno)
-
+        kos.append(premaknjeno)
         inputi[int(deli[3]) - 1].pop()
+
         steviloPonovitev += 1
+
+    kos.reverse()
+
+    for i in range(0, len(kos)):
+        inputi[int(deli[5]) - 1].append(kos[i])
 
 
 for input in inputi:
     stevec += input[-1]
 
-print("Del 1 -> " + stevec)
+print("Del 2 -> " + stevec)
